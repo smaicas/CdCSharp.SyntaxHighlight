@@ -1,7 +1,7 @@
 name: $(majorMinorVersion).$(semanticVersion) 
 
 trigger:
-- master
+- none
 
 pool:
   vmImage: 'windows-latest'

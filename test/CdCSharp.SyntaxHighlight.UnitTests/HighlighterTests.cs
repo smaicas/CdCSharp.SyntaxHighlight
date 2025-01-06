@@ -7,29 +7,8 @@ namespace CdCSharp.SyntaxHighlight.UnitTests;
 public class HighlighterTests
 {
     private readonly Highlighter _highlighter;
+
     public HighlighterTests() => _highlighter = new Highlighter(new HtmlEngine { UseCss = true });
-
-    [Fact]
-    public void Highlight_ShouldThrowArgumentNullException_WhenDefinitionNameIsNull()
-    {
-        // Arrange
-        Mock<IEngine> mockEngine = new();
-        Highlighter highlighter = new(mockEngine.Object);
-
-        // Act & Assert
-        Assert.Throws<ArgumentNullException>(() => highlighter.Highlight(null, "sample code"));
-    }
-
-    [Fact]
-    public void Highlight_ShouldThrowArgumentException_WhenDefinitionNameIsInvalid()
-    {
-        // Arrange
-        Mock<IEngine> mockEngine = new();
-        Highlighter highlighter = new(mockEngine.Object);
-
-        // Act & Assert
-        Assert.Throws<ArgumentException>(() => highlighter.Highlight("invalidLanguage", "sample code"));
-    }
 
     [Fact]
     public void Highlight_ShouldCallEngineHighlight_WhenDefinitionExists()
@@ -52,19 +31,18 @@ public class HighlighterTests
     }
 
     [Fact]
-    public void Highlight_ShouldHighlightCSharpKeywordsCorrectly()
+    public void Highlight_ShouldEscapeHtmlCharactersInInput()
     {
         // Arrange
-        string input = "if (true) { return; }";
+        string input = "<div>int x = 0;</div>";
         string definitionName = "csharp";
 
         // Act
         string result = _highlighter.Highlight(definitionName, input);
 
         // Assert
-        Assert.Contains("<span class=\"CSharpStatement\">if</span>", result);
-        Assert.Contains("<span class=\"CSharpKeyword\">true</span>", result);
-        Assert.Contains("<span class=\"CSharpStatement\">return</span>", result);
+        Assert.DoesNotContain("<div>", result);
+        Assert.Contains("&lt;div&gt;", result);
     }
 
     [Fact]
@@ -83,20 +61,6 @@ public class HighlighterTests
     }
 
     [Fact]
-    public void Highlight_ShouldHighlightStringLiteralsCorrectly()
-    {
-        // Arrange
-        string input = "string text = \"Hello, World!\";";
-        string definitionName = "csharp";
-
-        // Act
-        string result = _highlighter.Highlight(definitionName, input);
-
-        // Assert
-        Assert.Contains(@"<span class=""CSharpString"">&quot;Hello, World!&quot;</span>", result);
-    }
-
-    [Fact]
     public void Highlight_ShouldHighlightCommentsCorrectly()
     {
         // Arrange
@@ -106,8 +70,24 @@ public class HighlighterTests
         // Act
         string result = _highlighter.Highlight(definitionName, input);
 
-        // Assert 
+        // Assert
         Assert.Contains("<span class=\"CSharpComment\">// This is a comment\n</span>", result);
+    }
+
+    [Fact]
+    public void Highlight_ShouldHighlightCSharpKeywordsCorrectly()
+    {
+        // Arrange
+        string input = "if (true) { return; }";
+        string definitionName = "csharp";
+
+        // Act
+        string result = _highlighter.Highlight(definitionName, input);
+
+        // Assert
+        Assert.Contains("<span class=\"CSharpStatement\">if</span>", result);
+        Assert.Contains("<span class=\"CSharpKeyword\">true</span>", result);
+        Assert.Contains("<span class=\"CSharpStatement\">return</span>", result);
     }
 
     [Fact]
@@ -125,31 +105,17 @@ public class HighlighterTests
     }
 
     [Fact]
-    public void Highlight_ShouldThrowExceptionForInvalidDefinition()
+    public void Highlight_ShouldHighlightStringLiteralsCorrectly()
     {
         // Arrange
-        string input = "int x = 0;";
-        string definitionName = "invalidDefinition";
-
-        // Act & Assert
-        ArgumentException exception = Assert.Throws<ArgumentException>(() =>
-            _highlighter.Highlight(definitionName, input));
-        Assert.Equal("Parameter does not match any language definition (Parameter 'definitionName')", exception.Message);
-    }
-
-    [Fact]
-    public void Highlight_ShouldEscapeHtmlCharactersInInput()
-    {
-        // Arrange
-        string input = "<div>int x = 0;</div>";
+        string input = "string text = \"Hello, World!\";";
         string definitionName = "csharp";
 
         // Act
         string result = _highlighter.Highlight(definitionName, input);
 
         // Assert
-        Assert.DoesNotContain("<div>", result);
-        Assert.Contains("&lt;div&gt;", result);
+        Assert.Contains(@"<span class=""CSharpString"">&quot;Hello, World!&quot;</span>", result);
     }
 
     [Fact]
@@ -164,5 +130,40 @@ public class HighlighterTests
 
         // Assert
         Assert.Contains("<span class=\"CSharpVerbatimString\">@&quot;C:\\Temp\\Files&quot;</span>", result);
+    }
+
+    [Fact]
+    public void Highlight_ShouldThrowArgumentException_WhenDefinitionNameIsInvalid()
+    {
+        // Arrange
+        Mock<IEngine> mockEngine = new();
+        Highlighter highlighter = new(mockEngine.Object);
+
+        // Act & Assert
+        Assert.Throws<ArgumentException>(() => highlighter.Highlight("invalidLanguage", "sample code"));
+    }
+
+    [Fact]
+    public void Highlight_ShouldThrowArgumentNullException_WhenDefinitionNameIsNull()
+    {
+        // Arrange
+        Mock<IEngine> mockEngine = new();
+        Highlighter highlighter = new(mockEngine.Object);
+
+        // Act & Assert
+        Assert.Throws<ArgumentNullException>(() => highlighter.Highlight(null, "sample code"));
+    }
+
+    [Fact]
+    public void Highlight_ShouldThrowExceptionForInvalidDefinition()
+    {
+        // Arrange
+        string input = "int x = 0;";
+        string definitionName = "invalidDefinition";
+
+        // Act & Assert
+        ArgumentException exception = Assert.Throws<ArgumentException>(() =>
+            _highlighter.Highlight(definitionName, input));
+        Assert.Equal("Parameter does not match any language definition (Parameter 'definitionName')", exception.Message);
     }
 }

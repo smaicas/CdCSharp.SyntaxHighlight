@@ -10,20 +10,32 @@ public sealed class WordPattern : Pattern
     /// <summary>
     /// Initializes a new instance of the WordPattern class with the specified name, style, and words.
     /// </summary>
-    /// <param name="name">The name of the WordPattern.</param>
-    /// <param name="style">The style of the WordPattern.</param>
-    /// <param name="words">An enumerable collection of strings representing words in the pattern.</param>
+    /// <param name="name">
+    /// The name of the WordPattern.
+    /// </param>
+    /// <param name="style">
+    /// The style of the WordPattern.
+    /// </param>
+    /// <param name="words">
+    /// An enumerable collection of strings representing words in the pattern.
+    /// </param>
     public WordPattern(string name, Style style, IEnumerable<string> words)
         : base(name, style) => Words = words;
 
-    /// <summary>Gets the collection of words.</summary>
-    /// <value>The collection of words.</value>
+    /// <summary>
+    /// Gets the collection of words.
+    /// </summary>
+    /// <value>
+    /// The collection of words.
+    /// </value>
     public IEnumerable<string> Words { get; private set; }
 
     /// <summary>
     /// Generates a regex pattern based on the words provided.
     /// </summary>
-    /// <returns>A regex pattern that matches the specified words.</returns>
+    /// <returns>
+    /// A regex pattern that matches the specified words.
+    /// </returns>
     public override string GetRegexPattern()
     {
         string str = string.Empty;

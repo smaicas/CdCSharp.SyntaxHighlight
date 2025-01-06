@@ -4,22 +4,36 @@ using CdCSharp.SyntaxHighlight.Patterns;
 
 namespace CdCSharp.SyntaxHighlight;
 
-/// <summary>Represents the Highlighter class.</summary>
+/// <summary>
+/// Represents the Highlighter class.
+/// </summary>
 public class Highlighter
 {
-    /// <summary>Initializes a new instance of the Highlighter class with the specified engine.</summary>
-    /// <param name="engine">The engine used for highlighting.</param>
+    /// <summary>
+    /// Initializes a new instance of the Highlighter class with the specified engine.
+    /// </summary>
+    /// <param name="engine">
+    /// The engine used for highlighting.
+    /// </param>
     public Highlighter(IEngine engine) => Engine = engine;
 
-    /// <summary>Gets or sets the engine associated with this object.</summary>
+    /// <summary>
+    /// Gets or sets the engine associated with this object.
+    /// </summary>
     public IEngine Engine { get; set; }
 
     /// <summary>
     /// Highlights the input text based on the specified definition.
     /// </summary>
-    /// <param name="definitionName">The name of the definition to use for highlighting.</param>
-    /// <param name="input">The input text to be highlighted.</param>
-    /// <returns>The highlighted text if a valid definition is found; otherwise, returns the original input text.</returns>
+    /// <param name="definitionName">
+    /// The name of the definition to use for highlighting.
+    /// </param>
+    /// <param name="input">
+    /// The input text to be highlighted.
+    /// </param>
+    /// <returns>
+    /// The highlighted text if a valid definition is found; otherwise, returns the original input text.
+    /// </returns>
     public string Highlight(string? definitionName, string input)
     {
         ArgumentNullException.ThrowIfNull(definitionName, nameof(definitionName));

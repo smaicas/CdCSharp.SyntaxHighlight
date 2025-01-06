@@ -1,12 +1,12 @@
-using System.Drawing;
 using CdCSharp.SyntaxHighlight.Patterns;
+
+using System.Drawing;
 
 namespace CdCSharp.SyntaxHighlight.Languages;
 
 public partial class Definitions
 {
-
-    public static Definition PhpDefinition = new Definition(
+    public static Definition PhpDefinition = new(
         name: "Php",
         caseSensitive: false,
         style: new Style(
@@ -22,7 +22,6 @@ public partial class Definitions
         ),
         patterns: new Dictionary<string, Pattern>()
     {
-
 {
     "Comment", new BlockPattern(
             name: "Comment",
@@ -113,8 +112,8 @@ public partial class Definitions
                     style: FontStyle.Regular
                 )
             ),
-            words: new List<string>()
-            {
+            words:
+            [
                 "while",
                 "var",
                 "true",
@@ -149,7 +148,7 @@ public partial class Definitions
                 "case",
                 "break",
                 "as",
-            }
+            ]
         )
 },
 {
@@ -166,8 +165,8 @@ public partial class Definitions
                     style: FontStyle.Regular
                 )
             ),
-            words: new List<string>()
-            {
+            words:
+            [
                 "zend_version",
                 "zend_test_func",
                 "zend_logo_guid",
@@ -2060,9 +2059,8 @@ public partial class Definitions
                 "acos",
                 "accept_connect",
                 "abs",
-            }
+            ]
         )
 },
     });
-
 }
