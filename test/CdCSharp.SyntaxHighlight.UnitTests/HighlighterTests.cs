@@ -133,14 +133,17 @@ public class HighlighterTests
     }
 
     [Fact]
-    public void Highlight_ShouldThrowArgumentException_WhenDefinitionNameIsInvalid()
+    public void Highlight_ShouldUseDefaultLanguage_WhenDefinitionNameIsInvalid()
     {
         // Arrange
-        Mock<IEngine> mockEngine = new();
-        Highlighter highlighter = new(mockEngine.Object);
+        string input = @"string path = @""C:\Temp\Files"";";
+        string definitionName = "invalidDefinitionName";
 
-        // Act & Assert
-        Assert.Throws<ArgumentException>(() => highlighter.Highlight("invalidLanguage", "sample code"));
+        // Act
+        string result = _highlighter.Highlight(definitionName, input);
+
+        // Assert
+        Assert.Contains("<span class=\"CSharpVerbatimString\">@&quot;C:\\Temp\\Files&quot;</span>", result);
     }
 
     [Fact]
@@ -152,18 +155,5 @@ public class HighlighterTests
 
         // Act & Assert
         Assert.Throws<ArgumentNullException>(() => highlighter.Highlight(null, "sample code"));
-    }
-
-    [Fact]
-    public void Highlight_ShouldThrowExceptionForInvalidDefinition()
-    {
-        // Arrange
-        string input = "int x = 0;";
-        string definitionName = "invalidDefinition";
-
-        // Act & Assert
-        ArgumentException exception = Assert.Throws<ArgumentException>(() =>
-            _highlighter.Highlight(definitionName, input));
-        Assert.Equal("Parameter does not match any language definition (Parameter 'definitionName')", exception.Message);
     }
 }
