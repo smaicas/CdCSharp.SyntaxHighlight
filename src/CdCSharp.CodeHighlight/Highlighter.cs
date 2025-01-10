@@ -72,7 +72,7 @@ public class Highlighter
             "vbscript" or "visualbasicscript" => Definitions.VBScriptDefinition,
             "vb" or "visualbasic" => Definitions.VisualBasicDefinition,
             "xml" => Definitions.XmlDefinition,
-            _ => null,
+            _ => Definitions.CSharpDefinition,
         };
     }
 }
