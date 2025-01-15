@@ -1,4 +1,4 @@
-# CdCSharp.CodeHighlight
+# CdCSharp.SyntaxHighlight
 
 Syntax higlight library to generate HTML with highlight styles for code fragments.
 
