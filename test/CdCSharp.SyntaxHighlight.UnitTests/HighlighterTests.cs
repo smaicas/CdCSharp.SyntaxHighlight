@@ -133,6 +133,17 @@ public class HighlighterTests
     }
 
     [Fact]
+    public void Highlight_ShouldThrowArgumentNullException_WhenDefinitionNameIsNull()
+    {
+        // Arrange
+        Mock<IEngine> mockEngine = new();
+        Highlighter highlighter = new(mockEngine.Object);
+
+        // Act & Assert
+        Assert.Throws<ArgumentNullException>(() => highlighter.Highlight(null, "sample code"));
+    }
+
+    [Fact]
     public void Highlight_ShouldUseDefaultLanguage_WhenDefinitionNameIsInvalid()
     {
         // Arrange
@@ -144,16 +155,5 @@ public class HighlighterTests
 
         // Assert
         Assert.Contains("<span class=\"CSharpVerbatimString\">@&quot;C:\\Temp\\Files&quot;</span>", result);
-    }
-
-    [Fact]
-    public void Highlight_ShouldThrowArgumentNullException_WhenDefinitionNameIsNull()
-    {
-        // Arrange
-        Mock<IEngine> mockEngine = new();
-        Highlighter highlighter = new(mockEngine.Object);
-
-        // Act & Assert
-        Assert.Throws<ArgumentNullException>(() => highlighter.Highlight(null, "sample code"));
     }
 }

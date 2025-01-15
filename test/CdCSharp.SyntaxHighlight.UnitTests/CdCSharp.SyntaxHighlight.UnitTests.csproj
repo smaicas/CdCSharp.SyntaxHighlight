@@ -32,7 +32,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\..\src\CdCSharp.CodeHighlight\CdCSharp.SyntaxHighlight.csproj" />
+		<ProjectReference Include="..\..\src\CdCSharp.SyntaxHighlight\CdCSharp.SyntaxHighlight.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>
