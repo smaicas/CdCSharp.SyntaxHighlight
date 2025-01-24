@@ -1,72 +1,33 @@
-# CdCSharp.SyntaxHighlight
+# CdCSharp.SyntaxHighligh 📚
 
-Syntax higlight library to generate HTML with highlight styles for code fragments.
+[![NuGet](https://img.shields.io/nuget/v/CdCSharp.SyntaxHighlight.svg)](https://www.nuget.org/packages/CdCSharp.SyntaxHighlight)
+[![License](https://img.shields.io/github/license/smaicas/CdCSharp.SyntaxHighlight)](LICENSE)
+[![Build Status](https://img.shields.io/github/actions/workflow/status/smaicas/CdCSharp.SyntaxHighlight/dotnet.yml?branch=<BRANCH>)](https://github.com/smaicas/CdCSharp.SyntaxHighlight/actions/workflows/dotnet.yml)
 
-This library is an adaptation of another [Original Library](https://github.com/thomasjo/highlight)
+🚀 A SyntaxHighlight Library to generate stylized html from code fragments.
 
-Adapted to .NET
-Adapted to not use xml resource files
-Lightened
-Something else
+## 🌟 Features
 
-## Features
+- Syntax Highlight
+- Multiple languages support
 
-- Supports multiple programming languages.
-- Lightweight.
+## 📦 Installation
 
-## Installation
-
-Install-Package CdCSharp.SyntaxHighlight
-
-## Usage
-
-Here is a quick example of how to use the library:
-
-```csharp
-string input = "string text = \"Hello, World!\";";
-string definitionName = "csharp";
-string result = _highlighter.Highlight(definitionName, input);
+```bash
+dotnet add package CdCSharp.SyntaxHighlight
 ```
 
-## Supported Languages
+## 🤝 Contributing
 
-Aspx,
-C,
-Cobol,
-CPlusPlus,
-CSharp,
-Eiffel,
-Fortran,
-Haskell,
-Html,
-Java,
-JavaScript,
-Mercury,
-Msil,
-Pascal,
-Perl,
-Php,
-Python,
-Ruby,
-Sql,
-VBNET,
-VBScript,
-VisualBasic,
-Xml
+Contributions are welcome. Please read our [contribution guide](https://github.com/smaicas/CdCSharp.SyntaxHighlight/blob/master/CONTRIBUTE.md) before submitting a PR.
+Join the [discord](https://discord.gg/MpUfe7zD)
 
-## Contributing
+## 📄 License
 
-Contributions are welcome! It works but can be improved. I'll keep that in mind when I get some time.
-Please check out our [Collaboration Guidelines](COLLABORATE.md) for more information on how to get involved.
+This project is licensed under the GPL v3 License - see the [LICENSE](https://github.com/smaicas/CdCSharp.SyntaxHighlight/blob/master/LICENSE) file for details.
 
-## License
+## 🙏 Acknowledgments
 
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
-
-## Contact
-
-For questions or support, please open an issue or reach out to us at [cdcsharp.dev@gmail.com](mailto:cdcsharp.dev@gmail.com).
-
----
-
-Enjoy!
+- The .NET community
+- The Blazor Community
+- All contributors
